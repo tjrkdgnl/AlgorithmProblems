@@ -1,4 +1,4 @@
-package algorithms.부분합
+package algorithms.부분수열의합2
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -26,10 +26,13 @@ fun main() {
     a.sort()
     b.sort()
 
+    println(a)
+    println(b)
+
     search(a,b, s)
 }
 
-private fun search(front: MutableList<Int>, end: MutableList<Int>, target: Int) {
+fun search(front: MutableList<Int>, end: MutableList<Int>, target: Int) {
     var l = 0
     var r = end.size - 1
     var cnt: Long = 0
@@ -39,17 +42,17 @@ private fun search(front: MutableList<Int>, end: MutableList<Int>, target: Int) 
         val rightValue = end[r]
 
         if (leftValue + rightValue == target) {
-            var ac: Long = 0
-            var bc: Long = 0
+            var frontTmp: Long = 0
+            var lastTmp: Long = 0
             while (l < front.size && leftValue == front[l]) {
-                ac++
+                frontTmp++
                 l++
             }
             while (r > -1 && rightValue == end[r]) {
-                bc++
+                lastTmp++
                 r--
             }
-            cnt += ac * bc
+            cnt += frontTmp * lastTmp
         }
         if (leftValue + rightValue < target) {
             l++
@@ -62,7 +65,7 @@ private fun search(front: MutableList<Int>, end: MutableList<Int>, target: Int) 
     println(cnt)
 }
 
-private fun recursive(arr: IntArray, subList: MutableList<Int>, start: Int, end: Int, sum: Int) {
+fun recursive(arr: IntArray, subList: MutableList<Int>, start: Int, end: Int, sum: Int) {
 
     if (start == end) {
         subList.add(sum)
