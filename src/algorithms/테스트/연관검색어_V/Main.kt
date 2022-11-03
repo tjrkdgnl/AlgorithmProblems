@@ -14,7 +14,7 @@ private class Trie {
         var isEnd: Boolean = false
     )
 
-    private var dumy: Node = Node(null, Array(26) { null })
+    private var dummy: Node = Node(null, Array(26) { null })
 
     fun add(word: String) {
         var tail: Node? = null
@@ -24,11 +24,11 @@ private class Trie {
             val newNode = Node(cha.toString(), Array(26) { null })
 
             if (tail == null) { //첫 시작은 더미 노드에서 저장된 알파벳으로 시작해야 한다.
-                if (dumy.alphabetNodes[idx] == null) {
-                    dumy.alphabetNodes[idx] = newNode
+                if (dummy.alphabetNodes[idx] == null) {
+                    dummy.alphabetNodes[idx] = newNode
                     tail = newNode
                 } else {
-                    tail = dumy.alphabetNodes[idx]
+                    tail = dummy.alphabetNodes[idx]
                 }
             } else {
                 tail = if (tail.alphabetNodes[idx] == null) { // 다음 번 노드가 존재하지 않으면 이어준다.
@@ -47,7 +47,7 @@ private class Trie {
     //관련 단어 검색 시, 일부 단어의 끝에서부터 찾아야하므로 word의 끝 알파벳을 찾는다.
     private fun searchEndOfWord(word: String): Node? {
         //첫번째 알파벳은 반드시 더미노드에 저장되므로 더미노드로부터 불러와야한다.
-        var tail: Node? = dumy.alphabetNodes[word[0] - 'a'] ?: return null
+        var tail: Node? = dummy.alphabetNodes[word[0] - 'a'] ?: return null
 
         for (i in 1 until word.length) { //2번째 알파벳은 tail의 alphabetNodes를 살펴봐야 한다.
             val idx = word[i] - 'a'
