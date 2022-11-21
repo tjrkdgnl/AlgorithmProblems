@@ -10,14 +10,14 @@ fun main() {
 
     val ans = kmp(S, P)
 
-    if(ans.size !=0){
+    if (ans.size != 0) {
         println(1)
     } else {
         println(0)
     }
 }
 
-fun getPi(p: String): IntArray {
+private fun getPi(p: String): IntArray {
     val m = p.length
     var j = 0
     val pi = IntArray(m) { 0 }
@@ -35,7 +35,7 @@ fun getPi(p: String): IntArray {
     return pi
 }
 
-fun kmp(s: String, p: String): MutableList<Int> {
+private fun kmp(s: String, p: String): MutableList<Int> {
     val ans = mutableListOf<Int>()
     val pi = getPi(p)
 

@@ -9,8 +9,8 @@ import java.lang.Integer.min
  * 이 문제에서 메모이제이션을 사용하면 10만개 * 10만개 = 100억개의 공간이 필요하므로 문제를 풀 수는 없지만
  * DP를 이용하여 풀 수 있는 방법을 작성해봄
  */
-var ans = 987654321
-val memo = Array(100001) { IntArray(100001) { 987654321 } }
+private var ans = 987654321
+private val memo = Array(100001) { IntArray(100001) { 987654321 } }
 
 fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))

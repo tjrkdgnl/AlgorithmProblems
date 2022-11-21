@@ -65,7 +65,7 @@ fun search(front: MutableList<Int>, end: MutableList<Int>, target: Int) {
     println(cnt)
 }
 
-fun recursive(arr: IntArray, subList: MutableList<Int>, start: Int, end: Int, sum: Int) {
+private fun recursive(arr: IntArray, subList: MutableList<Int>, start: Int, end: Int, sum: Int) {
 
     if (start == end) {
         subList.add(sum)

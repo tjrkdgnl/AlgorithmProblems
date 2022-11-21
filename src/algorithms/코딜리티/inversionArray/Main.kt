@@ -2,7 +2,7 @@ package algorithms.코딜리티.inversionArray
 
 import java.util.*
 
-var ans =0
+private var ans =0
 
 fun merge(arr: IntArray, start: Int, mid: Int, end: Int) {
     var l = start

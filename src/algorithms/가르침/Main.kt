@@ -3,8 +3,8 @@ package algorithms.가르침
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-var max = -987654321
-val alphabet = ('a'..'z').toList()
+private var max = -987654321
+private val alphabet = ('a'..'z').toList()
 
 fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
@@ -58,7 +58,7 @@ fun main() {
     println(max)
 }
 
-fun recursive(
+private fun recursive(
     possible: List<Char>,
     wordCount: Array<Int>,
     wordList: MutableList<String>,

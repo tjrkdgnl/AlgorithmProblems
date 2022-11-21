@@ -1,4 +1,4 @@
-package 히스토그램에서가장큰직사각형
+package algorithms.히스토그램에서가장큰직사각형
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
