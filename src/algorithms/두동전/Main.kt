@@ -2,105 +2,85 @@ package algorithms.두동전
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import kotlin.math.min
 
 private val dy = intArrayOf(0, -1, 0, 1)
 private val dx = intArrayOf(-1, 0, 1, 0)
+private var ans = 987654321
 
-private var min = 987654321
+private data class Node(val y: Int, val x: Int)
 
 fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
     val (n, m) = br.readLine().split(" ").map { it.toInt() }
     val matrix = Array(n) { CharArray(m) }
 
-    val yPos = mutableListOf<Int>()
-    val xPos = mutableListOf<Int>()
+    val yList = mutableListOf<Int>()
+    val xList = mutableListOf<Int>()
 
-    for (i in 0 until n) {
-        val input = br.readLine()
+    for (y in 0 until n) {
+        val inputs = br.readLine()
 
-        for (j in 0 until input.length) {
-            matrix[i][j] = input[j]
+        for (x in 0 until inputs.length) {
+            matrix[y][x] = inputs[x]
 
-            if (input[j] == 'o') {
-                yPos.add(i)
-                xPos.add(j)
+            if (inputs[x] == 'o') {
+                yList.add(y)
+                xList.add(x)
             }
         }
     }
 
+    dfs(matrix, Node(yList[0], xList[0]), Node(yList[1], xList[1]), 0, 0)
 
-    val size = if (n > m) n else m
 
-    bruteForce(matrix, IntArray(size), yPos, xPos, 0)
-
-    if (min == 987654321) {
+    if (ans == 987654321 || ans > 10) {
         println(-1)
-    } else {
-        println(min)
-    }
-}
-
-fun bruteForce(
-    matrix: Array<CharArray>,
-    direction: IntArray,
-    yPos: MutableList<Int>,
-    xPos: MutableList<Int>,
-    cnt: Int
-) {
-    if (cnt == direction.size) {
-        var count = 0
-        var fy = yPos[0]
-        var fx = xPos[0]
-        var sy = yPos[1]
-        var sx = xPos[1]
-        var fall = false
-
-        for (j in direction) {
-            val fNy = fy + dy[j]
-            val fNx = fx + dx[j]
-            val sNy = sy + dy[j]
-            val sNx = sx + dx[j]
-
-            if ((fNy < 0 || fNy >= matrix.size || fNx < 0 || fNx >= matrix[0].size)) {
-                if ((sNy >= 0 && sNy < matrix.size && sNx >= 0 && sNx < matrix[0].size)) {
-                    count++
-                    fall = true
-                    break
-                }
-
-                count++
-                continue
-            }
-            if ((sNy < 0 || sNy >= matrix.size || sNx < 0 || sNx >= matrix[0].size)) {
-                count++
-                fall = true
-                break
-            }
-            if (matrix[fNy][fNx] != '#') {
-                fy = fNy
-                fx = fNx
-            }
-            if (matrix[sNy][sNx] != '#') {
-                sy = sNy
-                sx = sNx
-            }
-
-            count++
-        }
-
-        if (fall) {
-            min = if (min > count) count else min
-        }
-
         return
     }
 
+    println(ans)
+}
+
+private fun dfs(matrix: Array<CharArray>, n1: Node, n2: Node, click: Int, dir: Int) {
+    if (click > 10) {
+        ans = min(ans, click)
+        return
+    }
+
+    var n1Y = n1.y + dy[dir]
+    var n1X = n1.x + dx[dir]
+    var n2Y = n2.y + dy[dir]
+    var n2X = n2.x + dx[dir]
+
+    if (!range(n1Y, matrix.size, n1X, matrix[0].size) && !range(n2Y, matrix.size, n2X, matrix[0].size)) {
+        return
+    } else if (range(n1Y, matrix.size, n1X, matrix[0].size) && !range(n2Y, matrix.size, n2X, matrix[0].size)) {
+        ans = min(ans, click)
+        return
+    } else if (!range(n1Y, matrix.size, n1X, matrix[0].size) && range(n2Y, matrix.size, n2.x, matrix[0].size)) {
+        ans = min(ans, click)
+        return
+    }
+
+    if (matrix[n1Y][n1X] == '#') {
+        n1Y = n1.y
+        n1X = n1.x
+    }
+
+    if (matrix[n2Y][n2X] == '#') {
+        n2Y = n2.y
+        n2X = n2.x
+    }
 
     for (i in 0 until 4) {
-
-
-        direction[cnt] = i
-        bruteForce(matrix, direction, yPos, xPos, cnt + 1)
+        dfs(matrix, Node(n1Y, n1X), Node(n2Y, n2X), click + 1, i)
     }
 }
+
+private fun range(y: Int, yLength: Int, x: Int, xLength: Int) =
+    (y >= 0 && y < yLength && x >= 0 && x < xLength)
+
+
+
+
