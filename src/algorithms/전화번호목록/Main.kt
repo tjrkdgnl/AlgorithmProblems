@@ -3,7 +3,7 @@ package algorithms.전화번호목록
 import java.util.*
 
 
-fun main() {
+private fun main() {
 
     val clothes: Array<Array<String>> = arrayOf(
         arrayOf("yellow_hat", "face"),
@@ -48,7 +48,7 @@ fun main() {
     println(answer)
 }
 
-fun dfs(
+private fun dfs(
     matrix: Array<MutableList<String>>,
     visit: Array<BooleanArray>,
     arr: Array<String>,

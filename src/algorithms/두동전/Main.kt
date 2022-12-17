@@ -31,7 +31,9 @@ fun main() {
         }
     }
 
-    dfs(matrix, Node(yList[0], xList[0]), Node(yList[1], xList[1]), 0, 0)
+    for (i in 0 until 4) {
+        dfs(matrix, Node(yList[0], xList[0]), Node(yList[1], xList[1]), 1, i)
+    }
 
 
     if (ans == 987654321 || ans > 10) {
@@ -50,15 +52,19 @@ private fun dfs(matrix: Array<CharArray>, n1: Node, n2: Node, click: Int, dir: I
 
     var n1Y = n1.y + dy[dir]
     var n1X = n1.x + dx[dir]
+
     var n2Y = n2.y + dy[dir]
     var n2X = n2.x + dx[dir]
 
-    if (!range(n1Y, matrix.size, n1X, matrix[0].size) && !range(n2Y, matrix.size, n2X, matrix[0].size)) {
+    val n1Range = range(n1Y, matrix.size, n1X, matrix[0].size)
+    val n2Range = range(n2Y, matrix.size, n2X, matrix[0].size)
+
+    if (!n1Range && !n2Range) {
         return
-    } else if (range(n1Y, matrix.size, n1X, matrix[0].size) && !range(n2Y, matrix.size, n2X, matrix[0].size)) {
+    } else if (n1Range && !n2Range) {
         ans = min(ans, click)
         return
-    } else if (!range(n1Y, matrix.size, n1X, matrix[0].size) && range(n2Y, matrix.size, n2.x, matrix[0].size)) {
+    } else if (!n1Range && n2Range) {
         ans = min(ans, click)
         return
     }
