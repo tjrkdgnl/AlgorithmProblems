@@ -10,7 +10,7 @@ import java.io.InputStreamReader
  * 따라서 이 문제를 조합으로 변경하여 풀게 되면 O(2^N)정도의 시간으로 변경할 수 있다.
  * 조합으로 변경하기 위해 인덱스 범위를 좁혀 나간다.
  */
-fun main() {
+private fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
     val n = br.readLine().toInt()
 
@@ -20,7 +20,7 @@ fun main() {
     println(find(n, nums, visit, 0, 0, 0))
 }
 
-fun find(n: Int, nums: IntArray, visit: BooleanArray, idx: Int, cnt: Int, sum: Int): Int {
+private fun find(n: Int, nums: IntArray, visit: BooleanArray, idx: Int, cnt: Int, sum: Int): Int {
     if (n == cnt) {
         return if (!visit[sum]) {
             visit[sum] = true

@@ -3,7 +3,7 @@ package algorithms.차량번호판1
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-fun main() {
+private fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
 
     val type = br.readLine()
@@ -23,7 +23,7 @@ fun main() {
     println(answer)
 }
 
-fun find(type: String, ans: String, idx: Int): Int {
+private fun find(type: String, ans: String, idx: Int): Int {
     if (ans.length == type.length) {
         return 1
     }
